@@ -27,14 +27,14 @@ app.get('/create',(req,res) => {
     // })
 
     const video = new Video({
-        title: 'ARCHers Recap March 17-28, 2025 | Archers Network',
-        date:   new Date("2025-04-05"),
+        title: 'New Title',
+        date:   new Date("2025-04-04"),
         description: `In this ARCHers Recap: The Legislative Assembly probes potential amendments to the DLSU Student Handbook, MANIBELA held a three-day transport strike against inaccurate PTMP consolidation figures, and DLSU advances campus renovations with new elevator construction. 
                     ARCHers Recap features the latest university news and events, as well as the important national stories for the Lasallian community.
                     #ARCHNews #DLSUNews #PHNews #ARCHersRecap #ARCH #ArchersNetwork`,
         link: 'https://youtu.be/6KvyeW568wQ?si=63OSwFrIaJYu2Hws',
         channel: 'Archers Recap',
-        series: 'ENT'
+        series: 'NCA'
     })
     
 
@@ -90,8 +90,12 @@ app.get('/delete', async (req,res)=>{
 
 // select all videos from a specific video series
 app.get('/select-all', async (req,res)=>{
-    const videos = await Video.findOne({series: 'NCA'});
+    const videos = await Video.find({series: 'ENT'});
     res.send(videos);
 })
 // get the latest video released by a certain channel
+app.get('/get-latest',async (req,res) =>{
+    const date = await Video.findOne({series: 'NCA'}).sort({date : 'asc'});
+    res.send(date);
+})
 
