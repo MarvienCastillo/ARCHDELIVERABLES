@@ -6,8 +6,10 @@ To use the CRUD operation API, first step is to clone the repository. This is im
 the codes will not work unless all the files and dependencies are installed.
 
 ## How to clone the repository
-1. Open git bash
-2. Change the directory where you wanna clone the repository
-3. Type ``` git clone ```
+Open git bash and change the directory where you wanna clone this repository 
+Then type
+```
+git clone 
+```
 
 
