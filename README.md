@@ -21,8 +21,7 @@ This project contains CRUD operations API such as:
 - /delete -> Delete a video from the database.
 - /get -> Get video data.
 - /select-all -> Get all videos from a specific video series.
-- /get-latest -> Get the latest video released by a certain channel.
-<br>
+- /get-latest -> Get the latest video released by a certain channel.\
 After running ```node app``` , type ```localhost:3000/``` then the routes above.
 ## API - add a video to the database
 
