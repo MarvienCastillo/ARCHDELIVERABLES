@@ -16,7 +16,16 @@ node app
 ```
 After running ```node app``` , type ```localhost:3000/``` in a browser then the route below
 > ## Note
-> When updating values in the API and refreshing the website, please stop it first by clicking ``` ctrl + c ``` in the terminal then run ```node app``` again
+> When updating values in the API and refreshing the website, please stop it first by clicking ``` ctrl + c ``` in the terminal then run ```node app``` again.\
+
+## Dependencies 
+In case, the code didn't run sucessfully because of the dependencies. Kindly install every libraries by typing these in the command line:
+```
+npm install mongoose
+```
+```
+npm install express
+```
 ## Video Properties
 Each video contains the following properties:
 - Title - title of the video
