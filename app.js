@@ -14,39 +14,44 @@ mongoose.connect(uri,{ useNewUrlParser: true, useUnifiedTopology: true })
 
 // create video to the database
 app.get('/create',(req,res) => {
-    const video = new Video({
-        title: 'New Title',
-        date:   new Date("2025-04-04"),
-        description: `In this ARCHers Recap: The Legislative Assembly probes potential amendments to the DLSU Student Handbook, MANIBELA held a three-day transport strike against inaccurate PTMP consolidation figures, and DLSU advances campus renovations with new elevator construction. 
-                    ARCHers Recap features the latest university news and events, as well as the important national stories for the Lasallian community.
-                    #ARCHNews #DLSUNews #PHNews #ARCHersRecap #ARCH #ArchersNetwork`,
-        link: 'https://youtu.be/6KvyeW568wQ?si=63OSwFrIaJYu2Hws',
-        channel: 'NCA',
-        series: 'Archers Recap'
-    })
-    
-
-    video.save()
-        .then(result=>{
-            res.send(result);
+    try{
+        // values here can be changed
+        const video = new Video({
+            title: 'New Title',
+            date:   new Date("2025-04-05"),
+            description: `In this ARCHers Recap: The Legislative Assembly probes potential amendments to the DLSU Student Handbook, MANIBELA held a three-day transport strike against inaccurate PTMP consolidation figures, and DLSU advances campus renovations with new elevator construction. 
+                        ARCHers Recap features the latest university news and events, as well as the important national stories for the Lasallian community.
+                        #ARCHNews #DLSUNews #PHNews #ARCHersRecap #ARCH #ArchersNetwork`,
+            link: 'https://youtu.be/6KvyeW568wQ?si=63OSwFrIaJYu2Hws',
+            channel: 'ENT',
+            series: 'seARCHlight'
         })
-        .catch(err => {
-            console.log(err);
-        });
+        
+
+        video.save()
+            .then(result=>{
+                res.send(result);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }catch(err){
+        res.status(500).send('Create error');
+    }
 });
 
 // edit a video 
-app.get('/update', async (req, res) => {
+app.get('/update/:id', async (req, res) => {
   try {
+    const id = req.params.id;
     const update = await Video.findByIdAndUpdate(
-      '68d157f3023e3e1d9becd6f9',
-      { title: 'New Title' },
+      id ,
+      { title: 'New Title' }, // you can change this to test 
       { new: true } 
     );
 
     if (!update) {
-      console.log('Not Found');
-      return res.status(404).send('Video not found');
+        return res.status(404).send('<h1>Id ' + id + ' not found!</h1>');
     }
 
     console.log('Successful');
@@ -57,17 +62,16 @@ app.get('/update', async (req, res) => {
 });
 
 // delete a video
-app.get('/delete', async (req,res)=>{
+app.get('/delete/:id', async (req,res)=>{
     try{
-        let id = '68d1782cecbcfe934ce30ccc';
+        const id = req.params.id; 
         const deleteID = await Video.findByIdAndDelete(id);
         
         if (!deleteID) {
-            console.log('Not Found');
-            return res.status(404).send('Video not found');
+            return res.status(404).send('<h1>Id ' + id + ' not found!</h1>');
         }
         console.log('Successful');
-        res.send(`Updated video: ${deleteID.id}`);
+        res.send(`Deleted video: ${deleteID.id}`);
     } catch(error){
         res.status(500).send('Delete error');
     }
@@ -80,13 +84,32 @@ app.get('/get', async (req,res)=>{
 })
 
 // select all videos from a specific video series
-app.get('/select-all', async (req,res)=>{
-    const videos = await Video.find({series: 'ENT'});
-    res.send(videos);
+app.get('/select-all/:series', async (req,res)=>{
+    try{
+        const series = req.params.series;
+        const videos = await Video.find({series: series}); 
+        if(videos.length == 0){
+            return res.status(404).send('<h1>No Video under series ' + series + ' found! </h1>');
+        }
+        res.send(videos);
+    }catch(err){
+        res.status(500).send('GET error');
+    }
+
 })
 // get the latest video released by a certain channel
-app.get('/get-latest',async (req,res) =>{
-    const date = await Video.findOne({series: 'NCA'}).sort({date : 'asc'});
-    res.send(date);
+app.get('/get-latest/:channel',async (req,res) =>{
+    try{
+        const channel = req.params.channel;
+        const date = await Video.findOne({channel: channel}).sort({date : 'asc'}); // you can change the channel value 
+        if(!date){
+            return res.status(404).send('<h1>No Video under channel ' + channel + ' found! </h1>');
+        }
+        
+        res.send(date);
+    }catch(error){
+        res.status(500).send('GET error');
+    }
+    
 })
 
