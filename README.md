@@ -14,17 +14,20 @@ Once cloned, in your command line, run
 ```
 node app
 ```
-## CRUD Operations API
-This project contains CRUD operations API such as:
+After running ```node app``` , type ```localhost:3000/``` then the route below
+> Tip
+> When updating values in the API and refreshing the website, please stop it first by clicking ``` ctrl + c ``` in the terminal then run ```node app``` again
+## CRUD Operations API 
+This project contains CRUD operations API and their routes such as:
 - /create -> Add a video to the database.
 - /update -> Edit a video.
 - /delete -> Delete a video from the database.
 - /get -> Get video data.
 - /select-all -> Get all videos from a specific video series.
-- /get-latest -> Get the latest video released by a certain channel.\
-\
-After running ```node app``` , type ```localhost:3000/``` then the routes above.
-## API - add a video to the database
+- /get-latest -> Get the latest video released by a certain channel.
+## /create - add a video to the database
+
+
 
 
 
