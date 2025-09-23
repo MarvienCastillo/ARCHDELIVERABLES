@@ -8,8 +8,6 @@ the codes will not work unless all the files and dependencies are installed.
 ## How to clone the repository
 1. Open git bash
 2. Change the directory where you wanna clone the repository
-```
-git clone
-```
+3. Type ``` git clone ```
 
 
