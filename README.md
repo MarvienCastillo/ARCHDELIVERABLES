@@ -15,7 +15,7 @@ Once cloned, in your command line, run
 node app
 ```
 After running ```node app``` , type ```localhost:3000/``` in a browser then the route below
-> ***Tip***
+> ***Tip***\
 > When updating values in the API and refreshing the website, please stop it first by clicking ``` ctrl + c ``` in the terminal then run ```node app``` again
 ## Video Properties
 Each video contains the following properties:
